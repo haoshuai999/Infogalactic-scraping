@@ -77,37 +77,32 @@ def scrape(presidents_url):
 
 		dmp.diff_cleanupSemantic(diff)
 
-		string = ""
+		string = dmp.diff_prettyHtml(diff)
 
-		for diff_tuple in diff:
-			if diff_tuple[0] == 1:
-				string += "<span class='blue'>" + diff_tuple[1] + "</span>"
-			elif diff_tuple[0] == -1:
-				string += "<span class='red'>" + diff_tuple[1] + "</span>"
-			else:
-				string += diff_tuple[1]
-			if '\n' in diff_tuple[1]:
-				string += "<br><br>"
+		# string = ""
 
-		filename = all_names[i] + ".html"
+		# for diff_tuple in diff:
+		# 	if diff_tuple[0] == 1:
+		# 		string += "<span class='blue'>" + diff_tuple[1] + "</span>"
+		# 	elif diff_tuple[0] == -1:
+		# 		string += "<span class='red'>" + diff_tuple[1] + "</span>"
+		# 	else:
+		# 		string += diff_tuple[1]
+		# 	if '\n' in diff_tuple[1]:
+		# 		string += "<br><br>"
+
+		president_name = wiki_presidents_url[i].replace("https://en.wikipedia.org/wiki/","")
+		filename = president_name + ".html"
 		f = open(filename,'w', encoding='UTF-8')
 
 		wrapper = """<html>
 		<head>
-		<title>Barack_Obama</title>
-		<style>
-		.blue{
-			background-color:blue;
-		}
-		.red{
-			background-color:red;
-		}
-		</style>
+		<title>%s</title>
 		</head>
 		<body><p>%s</p></body>
 		</html>"""
 
-		whole = wrapper % (string)
+		whole = wrapper % (president_name, string)
 		f.write(whole)
 		f.close()
 
