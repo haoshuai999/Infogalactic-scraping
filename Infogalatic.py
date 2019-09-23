@@ -42,7 +42,7 @@ def scrape(presidents_url):
 
 		if len(revisions) > 1:
 			wiki_presidents_url.append("https://en.wikipedia.org/wiki/" + all_names[i])
-			infogalactic_presidents_url.append("https://infogalactic.com/info/" + all_names[i])
+			infogalactic_presidents_url.append("https://infogalactic.com/w/index.php?title=" + all_names[i] + "&mobileaction=toggle_view_desktop")
 
 	for i in range(len(wiki_presidents_url)):
 		browser.implicitly_wait(10)
